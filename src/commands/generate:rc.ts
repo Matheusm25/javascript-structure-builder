@@ -3,12 +3,23 @@
  */
 module.exports = {
   name: 'generate:rc',
+  alias: ['grc'],
   description: 'Create new component inside src/components',
   run: async toolbox => {
-    const { parameters, createComponent } = toolbox;
+    const { parameters,
+      createComponent,
+      filesystem,
+      wantOverwrite
+    } = toolbox;
 
     const name = parameters.first;
 
-    await createComponent('src/components', name);
+    if (filesystem.exists(`src${filesystem.separator}components${filesystem.separator}${name}`)) {
+      if (! await wantOverwrite(name)) {
+        return;
+      }
+    }
+
+    await createComponent(`src${toolbox.filesystem.separator}components`, name);
   }
 };
