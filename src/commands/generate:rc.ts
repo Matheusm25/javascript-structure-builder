@@ -1,3 +1,6 @@
+/**
+ * Create a react component with a index.js and a index.css file
+ */
 module.exports = {
   name: 'generate:rc',
   description: 'Create new component inside src/components',

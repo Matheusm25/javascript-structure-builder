@@ -4,6 +4,11 @@ module.exports = toolbox => {
     template
   } = toolbox;
 
+  /**
+   * 
+   * @param folder folder name where the component will be generated
+   * @param name name of the component
+   */
   async function createComponent(folder: string, name: string) {
     if (!name) {
       error('Name must be specified');

@@ -1,10 +1,9 @@
 {
-  "name": "jsc",
-  "version": "1.0.0",
-  "description": "Javascript Structure Creator CLI",
-  "private": true,
+  "name": "js-structure-builder",
+  "version": "1.0.1",
+  "description": "Javascript Structure Builder CLI",
   "bin": {
-    "jsc": "bin/jsc"
+    "jsb": "bin/jsb"
   },
   "scripts": {
     "format": "prettier --write **/*.{js,ts,tsx,json}",
