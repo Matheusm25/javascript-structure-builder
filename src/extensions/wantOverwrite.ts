@@ -1,6 +1,6 @@
 module.exports = toolbox => {
   const {
-    print: {warning},
+    print: { warning },
     prompt
   } = toolbox;
 
@@ -10,7 +10,8 @@ module.exports = toolbox => {
    */
   async function wantOverwrite(name: string) {
     warning(`It seems that ${name} already exists.`);
-    return await prompt.confirm('Do you want to overwrite it? ');
+    const confirmation = await prompt.confirm('Do you want to overwrite it? ');
+    return confirmation;
   }
 
   toolbox.wantOverwrite = wantOverwrite;

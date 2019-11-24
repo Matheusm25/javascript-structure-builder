@@ -5,7 +5,7 @@ async function run(argv) {
     .brand('jsb')
     .src(__dirname)
     .plugins('./node_modules', { matching: 'jsb-*', hidden: true })
-    .help() 
+    .help()
     .defaultCommand()
     .version()
     .create();

@@ -6,16 +6,16 @@ module.exports = {
   alias: ['grc'],
   description: 'Create new component inside src/components',
   run: async toolbox => {
-    const { parameters,
-      createComponent,
-      filesystem,
-      wantOverwrite
-    } = toolbox;
+    const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
 
     const name = parameters.first;
 
-    if (filesystem.exists(`src${filesystem.separator}components${filesystem.separator}${name}`)) {
-      if (! await wantOverwrite(name)) {
+    if (
+      filesystem.exists(
+        `src${filesystem.separator}components${filesystem.separator}${name}`
+      )
+    ) {
+      if (!(await wantOverwrite(name))) {
         return;
       }
     }

@@ -1,6 +1,6 @@
 {
   "name": "js-structure-builder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Javascript Structure Builder CLI",
   "bin": {
     "jsb": "bin/jsb"
@@ -15,7 +15,9 @@
     "test": "jest",
     "watch": "jest --watch",
     "snapupdate": "jest --updateSnapshot",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "clean-comp": "rm -rf src/components"
+
   },
   "files": [
     "tsconfig.json",
