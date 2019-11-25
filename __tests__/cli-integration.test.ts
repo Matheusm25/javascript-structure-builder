@@ -18,10 +18,12 @@ test('outputs help', async () => {
 });
 
 test('generates file', async () => {
-  const foomodel = !!filesystem.read('src/components/foo/index.js');
+  const foomodel = !!filesystem.read(
+    `src${filesystem.separator}components${filesystem.separator}foo${filesystem.separator}index.js`
+  );
 
   expect(foomodel).toBe(true);
 
   // cleanup artifact
-  filesystem.remove('src/components');
+  filesystem.remove(`src${filesystem.separator}components`);
 });

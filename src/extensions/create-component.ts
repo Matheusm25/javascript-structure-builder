@@ -1,7 +1,8 @@
 module.exports = toolbox => {
   const {
     print: { success, error },
-    template
+    template,
+    filesystem
   } = toolbox;
 
   /**
@@ -17,17 +18,17 @@ module.exports = toolbox => {
 
     await template.generate({
       template: 'component.js.ejs',
-      target: `${folder}/${name}/index.js`,
+      target: `${folder}${filesystem.separator}${name}${filesystem.separator}index.js`,
       props: { name }
     });
 
     await template.generate({
       template: 'style.js.ejs',
-      target: `${folder}/${name}/index.css`,
+      target: `${folder}${filesystem.separator}${name}${filesystem.separator}index.css`,
       props: { name }
     });
 
-    success(`Generated ${folder}/${name}.`);
+    success(`Generated ${folder}${filesystem.separator}${name}.`);
   }
 
   toolbox.createComponent = createComponent;
