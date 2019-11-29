@@ -11,7 +11,9 @@ module.exports = {
       wantOverwrite,
       template,
       print: { success, error },
-      parameters
+      parameters,
+      prompt: { confirm },
+      configCombineReducer
     } = toolbox;
 
     const name = parameters.first;
@@ -23,23 +25,12 @@ module.exports = {
 
     if (
       filesystem.exists(
-        `src${filesystem.separator}store${filesystem.separator}reducers${filesystem.separator}${name}.s`
+        `src${filesystem.separator}store${filesystem.separator}reducers${filesystem.separator}${name}.js`
       )
     ) {
       if (!(await wantOverwrite(name))) {
         return;
       }
-    }
-
-    if (
-      !filesystem.exists(
-        `src${filesystem.separator}store${filesystem.separator}reducers${filesystem.separator}index.js`
-      )
-    ) {
-      await template.generate({
-        template: 'combine-reducers.js.ejs',
-        target: `src${filesystem.separator}store${filesystem.separator}reducers${filesystem.separator}index.js`
-      });
     }
 
     await template.generate({
@@ -51,5 +42,12 @@ module.exports = {
     success(
       `Generated src${filesystem.separator}store${filesystem.separator}reducers${filesystem.separator}${name}.js .`
     );
+
+    const configRed = await confirm(
+      'Do you want to add the reducers to the combine-reducers? '
+    );
+    if (configRed) {
+      configCombineReducer();
+    }
   }
 };

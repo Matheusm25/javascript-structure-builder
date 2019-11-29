@@ -50,7 +50,6 @@ jsb rxc
 The redux config file use a rootReducers to get all the reducers
 in the *src/store/reducers* directory, using the **redux:reducer** 
 a reducer will be created.
-#### you still need config the *src/store/reducers/index.js* (for now)
 ```bash
 jsb redux:reducer reducerName
 ```

@@ -10,7 +10,10 @@ module.exports = toolbox => {
    */
   async function wantOverwrite(name: string) {
     warning(`It seems that ${name} already exists.`);
-    const confirmation = await prompt.confirm('Do you want to overwrite it? ');
+    const confirmation = await prompt.confirm(
+      'Do you want to overwrite it? ',
+      true
+    );
     return confirmation;
   }
 

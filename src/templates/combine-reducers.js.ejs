@@ -2,6 +2,13 @@ import { combineReducers } from 'redux';
 
 // import reducer from './reducer' ;
 
+<% for (var i = 0; i < props.reducers.length; i++) {%>
+import <%= props.reducers[i] %> from './<%- props.reducers[i] %>' ;
+<% } %>
+
 export default combineReducers({
   // reducer
+  <% for (var i = 0; i < props.reducers.length; i++) {%>
+  <%= props.reducers[i] %>,
+  <% } %>
 });

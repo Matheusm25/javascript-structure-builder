@@ -1,6 +1,6 @@
 {
   "name": "js-structure-builder",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "Javascript Structure Builder CLI",
   "bin": {
     "jsb": "bin/jsb"

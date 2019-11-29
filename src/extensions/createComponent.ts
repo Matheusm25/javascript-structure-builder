@@ -6,7 +6,7 @@ module.exports = toolbox => {
   } = toolbox;
 
   /**
-   *
+   * Create a component in that specified folder
    * @param folder folder name where the component will be generated
    * @param name name of the component
    */

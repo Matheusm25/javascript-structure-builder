@@ -18,6 +18,8 @@ test('outputs help', async () => {
 });
 
 test('generates file', async () => {
+  await cli('generate:rc foo');
+
   const foomodel = !!filesystem.read(
     `src${filesystem.separator}components${filesystem.separator}foo${filesystem.separator}index.js`
   );
