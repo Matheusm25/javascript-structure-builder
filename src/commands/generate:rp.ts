@@ -12,7 +12,7 @@ module.exports = {
 
     if (
       filesystem.exists(
-        `src${filesystem.separator}pages${filesystem.separator}${name}`
+        `src${filesystem.separator}views${filesystem.separator}${name}`
       )
     ) {
       if (!(await wantOverwrite(name))) {
@@ -20,6 +20,6 @@ module.exports = {
       }
     }
 
-    await createComponent(`src${toolbox.filesystem.separator}pages`, name);
+    await createComponent(`src${toolbox.filesystem.separator}views`, name);
   }
 };
