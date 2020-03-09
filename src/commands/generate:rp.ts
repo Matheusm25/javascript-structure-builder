@@ -4,7 +4,7 @@
 module.exports = {
   name: 'generate:rp',
   alias: ['grp'],
-  description: 'Create new page inside src/pages',
+  description: 'Create new react page inside src/pages',
   run: async toolbox => {
     const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
 

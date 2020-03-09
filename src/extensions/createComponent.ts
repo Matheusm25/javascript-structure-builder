@@ -24,7 +24,7 @@ module.exports = toolbox => {
 
     await template.generate({
       template: 'style.js.ejs',
-      target: `${folder}${filesystem.separator}${name}${filesystem.separator}index.css`,
+      target: `${folder}${filesystem.separator}${name}${filesystem.separator}styles.js`,
       props: { name }
     });
 

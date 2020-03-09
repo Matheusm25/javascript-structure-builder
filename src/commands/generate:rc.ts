@@ -4,7 +4,7 @@
 module.exports = {
   name: 'generate:rc',
   alias: ['grc'],
-  description: 'Create new component inside src/components',
+  description: 'Create new react component inside src/components',
   run: async toolbox => {
     const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
 

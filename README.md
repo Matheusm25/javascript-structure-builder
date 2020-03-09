@@ -22,7 +22,7 @@ yarn global add js-structure-builder
 
 ### Using
 
-#### Creating component
+#### Creating react component
 
 Using the **generate:rc** command a react functional component will be created in *src/components*.
 ```bash
@@ -31,6 +31,17 @@ jsb generate:rc componentName
 Or with the alias:
 ```bash
 jsb grc componentName
+```
+
+#### Creating react page
+
+Using the **generate:rp** command a react functional component will be created in *src/pages*.
+```bash
+jsb generate:rp pageName
+```
+Or with the alias:
+```bash
+jsb grp pageName
 ```
 
 ### Creating a redux config file
