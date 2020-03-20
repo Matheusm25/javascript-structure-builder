@@ -6,12 +6,7 @@ module.exports = {
   alias: ['grc'],
   description: 'Create new react component inside src/components',
   run: async toolbox => {
-    const {
-      parameters,
-      createComponent,
-      filesystem,
-      wantOverwrite
-    } = toolbox;
+    const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
 
     const { options } = parameters;
     let path;
@@ -25,11 +20,7 @@ module.exports = {
 
     const name = parameters.first;
 
-    if (
-      filesystem.exists(
-        `${path}${filesystem.separator}${name}`
-      )
-    ) {
+    if (filesystem.exists(`${path}${filesystem.separator}${name}`)) {
       if (!(await wantOverwrite(name))) {
         return;
       }
