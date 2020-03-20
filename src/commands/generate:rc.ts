@@ -6,13 +6,28 @@ module.exports = {
   alias: ['grc'],
   description: 'Create new react component inside src/components',
   run: async toolbox => {
-    const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
+    const {
+      parameters,
+      createComponent,
+      filesystem,
+      wantOverwrite
+    } = toolbox;
+
+    const { options } = parameters;
+    let path;
+    if (options.here) {
+      path = '.';
+    } else if (options.path) {
+      path = options.path;
+    } else {
+      path = `src${toolbox.filesystem.separator}components`;
+    }
 
     const name = parameters.first;
 
     if (
       filesystem.exists(
-        `src${filesystem.separator}components${filesystem.separator}${name}`
+        `${path}${filesystem.separator}${name}`
       )
     ) {
       if (!(await wantOverwrite(name))) {
@@ -20,6 +35,6 @@ module.exports = {
       }
     }
 
-    await createComponent(`src${toolbox.filesystem.separator}components`, name);
+    await createComponent(path, name);
   }
 };

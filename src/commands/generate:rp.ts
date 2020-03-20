@@ -9,10 +9,21 @@ module.exports = {
     const { parameters, createComponent, filesystem, wantOverwrite } = toolbox;
 
     const name = parameters.first;
-
+    
+    const { options } = parameters;
+    
+    let path;
+    if (options.here) {
+      path = '.';
+    } else if (options.path) {
+      path = options.path;
+    } else {
+      path = `src${toolbox.filesystem.separator}views`;
+    }
+    
     if (
       filesystem.exists(
-        `src${filesystem.separator}views${filesystem.separator}${name}`
+        `${path}${filesystem.separator}${name}`
       )
     ) {
       if (!(await wantOverwrite(name))) {
@@ -20,6 +31,6 @@ module.exports = {
       }
     }
 
-    await createComponent(`src${toolbox.filesystem.separator}views`, name);
+    await createComponent(path, name);
   }
 };

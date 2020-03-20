@@ -9,20 +9,12 @@ module.exports = {
   run: async toolbox => {
     const {
       filesystem,
-      filesystem: {
-        separator,
-      },
+      filesystem: { separator },
       template,
       system,
       parameters,
-      print: {
-        success,
-        error,
-        warning,
-        info,
-        spin,
-      },
-      wantOverwrite,
+      print: { success, error, warning, info, spin },
+      wantOverwrite
     } = toolbox;
 
     const projectName = parameters.first;
@@ -41,53 +33,61 @@ module.exports = {
     // git init
     try {
       await system.run(`cd ${projectName} && git init`);
-      success('Git repository initiate.')
+      success('Git repository initiate.');
     } catch (err) {
-      warning(`Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`);
+      warning(
+        `Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`
+      );
     }
 
     // create parent folders
-    const outerFolders = [
-      'public',
-      'src',
-    ];
-    outerFolders.map(item => filesystem.dir(`${filesystem.cwd()}${separator}${projectName}${separator}${item}`));
+    const outerFolders = ['public', 'src'];
+    outerFolders.map(item =>
+      filesystem.dir(
+        `${filesystem.cwd()}${separator}${projectName}${separator}${item}`
+      )
+    );
 
     // create external files
-    const outerFiles = [
-      'README.md',
-      'TODO.md',
-      '.env',
-    ];
+    const outerFiles = ['README.md', 'TODO.md', '.env'];
     outerFiles.map(item => {
-      filesystem.write(`${filesystem.cwd()}${separator}${projectName}${separator}${item}`, '');
+      filesystem.write(
+        `${filesystem.cwd()}${separator}${projectName}${separator}${item}`,
+        ''
+      );
       info(`${projectName}${separator}${item} was created.`);
     });
-    
+
     // create public files
     const publicFiles = [
       { template: 'react-index-html.js.ejs', fileName: 'index.html' },
       { template: 'react-manifest-json.js.ejs', fileName: 'manifest.json' },
       { template: 'react-robots-txt.js.ejs', fileName: 'robots.txt' },
-      { template: 'react-gitignore.js.ejs', fileName: '.gitignore'},
+      { template: 'react-gitignore.js.ejs', fileName: '.gitignore' }
     ];
 
     publicFiles.map(async (item, index) => {
       await template.generate({
         template: item.template,
-        target: `${filesystem.cwd()}${separator}${projectName}${separator}public${separator}${item.fileName}`,
-        props: { name: projectName },
-      })
-      info(`${projectName}${separator}public${separator}${item.fileName} was created.`);
+        target: `${filesystem.cwd()}${separator}${projectName}${separator}public${separator}${
+          item.fileName
+        }`,
+        props: { name: projectName }
+      });
+      info(
+        `${projectName}${separator}public${separator}${item.fileName} was created.`
+      );
     });
 
     // generate package.json
     await template.generate({
       template: 'react-package-json.js.ejs',
       target: `${filesystem.cwd()}${separator}${projectName}${separator}package.json`,
-      props: { name: projectName },
-    })
-    info(`${filesystem.cwd()}${separator}${projectName}${separator}package.json was created.`);
+      props: { name: projectName }
+    });
+    info(
+      `${filesystem.cwd()}${separator}${projectName}${separator}package.json was created.`
+    );
 
     const sourceFolders = [
       'assets',
@@ -96,32 +96,38 @@ module.exports = {
       'views',
       'services',
       'store',
-      'utils',
+      'utils'
     ];
 
     sourceFolders.map(item => {
-      filesystem.dir(`${filesystem.cwd()}${separator}${projectName}${separator}src${separator}${item}`);
+      filesystem.dir(
+        `${filesystem.cwd()}${separator}${projectName}${separator}src${separator}${item}`
+      );
       info(`${projectName}${separator}src${separator}${item} was created.`);
     });
 
     const sourceFiles = [
       {
         template: 'react-index.js.ejs',
-        fileName: 'index.js',
+        fileName: 'index.js'
       },
       {
         template: 'react-app.js.ejs',
-        fileName: 'App.js',
-      },
+        fileName: 'App.js'
+      }
     ];
     sourceFiles.map(async item => {
       await template.generate({
         template: item.template,
-        target: `${filesystem.cwd()}${separator}${projectName}${separator}src${separator}${item.fileName}`,
-        props: { name: projectName },
-      })
-      info(`${projectName}${separator}src${separator}${item.fileName} was created.`);
-    })
+        target: `${filesystem.cwd()}${separator}${projectName}${separator}src${separator}${
+          item.fileName
+        }`,
+        props: { name: projectName }
+      });
+      info(
+        `${projectName}${separator}src${separator}${item.fileName} was created.`
+      );
+    });
 
     // download packcages
     try {
@@ -130,7 +136,10 @@ module.exports = {
       await system.run(`cd ${projectName} && ${commandInstall}`);
       spinner.succeed('Packages successfully downloaded.');
     } catch (err) {
-      error(`couldn't execute '${err.cmd}'. check if you have npm${parameters.options.yarn && ' and yarn'} instaled and configured in your path.`);
+      error(
+        `couldn't execute '${err.cmd}'. check if you have npm${parameters
+          .options.yarn && ' and yarn'} instaled and configured in your path.`
+      );
     }
   }
-}
+};
