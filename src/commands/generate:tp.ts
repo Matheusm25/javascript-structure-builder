@@ -1,11 +1,11 @@
 /**
- * Structure for a new React project
+ * Structure for a new Typescript API
  */
 
 module.exports = {
-  name: 'generate:re',
-  alias: ['gre'],
-  description: 'Create a new react app structure',
+  name: 'generate:tp',
+  alias: ['gtp'],
+  description: 'Create a new typescript api structure',
   run: async toolbox => {
     const {
       filesystem,
@@ -35,68 +35,47 @@ module.exports = {
       await system.run(`cd ${projectName} && git init`);
       success('Git repository initiated.');
     } catch (err) {
-      warning(
-        `Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`
-      );
+      warning(`Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`);
     }
 
-    // create parent folders
-    const outerFolders = ['public', 'src'];
+    // create parente folders
+    const outerFolders = ['src'];
     outerFolders.map(item =>
       filesystem.dir(
         `${filesystem.cwd()}${separator}${projectName}${separator}${item}`
       )
     );
 
-    // create external files
-    const outerFiles = ['README.md', 'TODO.md', '.env'];
-    outerFiles.map(item => {
-      filesystem.write(
-        `${filesystem.cwd()}${separator}${projectName}${separator}${item}`,
-        ''
-      );
-      info(`${projectName}${separator}${item} was created.`);
-    });
-
-    // create public files
-    const publicFiles = [
-      { template: 'react-index-html.js.ejs', fileName: 'index.html' },
-      { template: 'react-manifest-json.js.ejs', fileName: 'manifest.json' },
-      { template: 'react-robots-txt.js.ejs', fileName: 'robots.txt' },
-      { template: 'react-gitignore.js.ejs', fileName: '.gitignore' }
+    const outerFiles = [
+      { template: 'typescript-api/.eslintignore.ejs', fileName: '.eslintignore' },
+      { template: 'typescript-api/.eslintrc.json.ejs', fileName: '.eslintrc.json' },
+      { template: 'typescript-api/.gitignore.ejs', fileName: '.gitignore' },
+      { template: 'typescript-api/babel.config.js.ejs', fileName: 'babel.config.js' },
+      { template: 'typescript-api/jest.config.js.ejs', fileName: 'jest.config.js' },
+      { template: 'typescript-api/package.json.ejs', fileName: 'package.json' },
+      { template: 'typescript-api/tsconfig.json.ejs', fileName: 'tsconfig.json' },
     ];
 
-    publicFiles.map(async (item, index) => {
+    outerFiles.map(async (item, index) => {
       await template.generate({
         template: item.template,
-        target: `${filesystem.cwd()}${separator}${projectName}${separator}public${separator}${
+        target: `${filesystem.cwd()}${separator}${projectName}${separator}${
           item.fileName
         }`,
-        props: { name: projectName }
+        props: { projectName }
       });
       info(
-        `${projectName}${separator}public${separator}${item.fileName} was created.`
+        `${projectName}${separator}${item.fileName} was created.`
       );
     });
-
-    // generate package.json
-    await template.generate({
-      template: 'react-package-json.js.ejs',
-      target: `${filesystem.cwd()}${separator}${projectName}${separator}package.json`,
-      props: { name: projectName }
-    });
-    info(
-      `${filesystem.cwd()}${separator}${projectName}${separator}package.json was created.`
-    );
 
     const sourceFolders = [
       'assets',
-      'components',
       'config',
-      'views',
       'services',
-      'store',
-      'utils'
+      'models',
+      'controllers',
+      'tests'
     ];
 
     sourceFolders.map(item => {
@@ -108,14 +87,15 @@ module.exports = {
 
     const sourceFiles = [
       {
-        template: 'react-index.js.ejs',
-        fileName: 'index.js'
+        template: 'typescript-api/server.ts.ejs',
+        fileName: 'server.ts'
       },
       {
-        template: 'react-app.js.ejs',
-        fileName: 'App.js'
+        template: 'typescript-api/routes.ts.ejs',
+        fileName: 'routes.ts'
       }
     ];
+
     sourceFiles.map(async item => {
       await template.generate({
         template: item.template,
@@ -136,6 +116,8 @@ module.exports = {
       await system.run(`cd ${projectName} && ${commandInstall}`);
       spinner.succeed('Packages successfully downloaded.');
     } catch (err) {
+      error(err);
+      console.log(err);
       error(
         `couldn't execute '${err.cmd}'. check if you have npm${parameters
           .options.yarn && ' and yarn'} instaled and configured in your path.`
