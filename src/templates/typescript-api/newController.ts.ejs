@@ -1,0 +1,40 @@
+import { Response, Request } from 'express';
+
+class <%= props.controllerName %>Controller {
+  /**
+   * Show a list of all <%= props.controllerName %>.
+   * GET <%= props.controllerName %>
+   */
+  async index (req: Request, res: Response) {
+  }
+
+  /**
+   * Create/save a new <%= props.controllerName %>.
+   * POST <%= props.controllerName %>
+   */
+  async store (req: Request, res: Response) {
+  }
+
+  /**
+   * Display a single <%= props.controllerName %>.
+   * GET <%= props.controllerName %>/:id
+   */
+  async show (req: Request, res: Response) {
+  }
+
+  /**
+   * Update <%= props.controllerName %> details.
+   * PUT or PATCH <%= props.controllerName %>/:id
+   */
+  async update (req: Request, res: Response) {
+  }
+
+  /**
+   * Delete a <%= props.controllerName %> with id.
+   * DELETE <%= props.controllerName %>/:id
+   */
+  async destroy (req: Request, res: Response) {
+  }
+}
+
+module.exports = <%= props.controllerName %>Controller;
