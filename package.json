@@ -1,12 +1,9 @@
 {
   "name": "js-structure-builder",
-  "version": "1.2.2",
+  "version": "1.2.0",
   "description": "Javascript Structure Builder CLI",
   "bin": {
     "jsb": "bin/jsb"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "format": "prettier --write **/*.{js,ts,tsx,json}",

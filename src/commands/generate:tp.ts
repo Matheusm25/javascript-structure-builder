@@ -35,7 +35,9 @@ module.exports = {
       await system.run(`cd ${projectName} && git init`);
       success('Git repository initiated.');
     } catch (err) {
-      warning(`Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`);
+      warning(
+        `Couldn't execute '${err.cmd}'. check if you have git instaled and configured in your path.`
+      );
     }
 
     // create parente folders
@@ -47,13 +49,28 @@ module.exports = {
     );
 
     const outerFiles = [
-      { template: 'typescript-api/.eslintignore.ejs', fileName: '.eslintignore' },
-      { template: 'typescript-api/.eslintrc.json.ejs', fileName: '.eslintrc.json' },
+      {
+        template: 'typescript-api/.eslintignore.ejs',
+        fileName: '.eslintignore'
+      },
+      {
+        template: 'typescript-api/.eslintrc.json.ejs',
+        fileName: '.eslintrc.json'
+      },
       { template: 'typescript-api/.gitignore.ejs', fileName: '.gitignore' },
-      { template: 'typescript-api/babel.config.js.ejs', fileName: 'babel.config.js' },
-      { template: 'typescript-api/jest.config.js.ejs', fileName: 'jest.config.js' },
+      {
+        template: 'typescript-api/babel.config.js.ejs',
+        fileName: 'babel.config.js'
+      },
+      {
+        template: 'typescript-api/jest.config.js.ejs',
+        fileName: 'jest.config.js'
+      },
       { template: 'typescript-api/package.json.ejs', fileName: 'package.json' },
-      { template: 'typescript-api/tsconfig.json.ejs', fileName: 'tsconfig.json' },
+      {
+        template: 'typescript-api/tsconfig.json.ejs',
+        fileName: 'tsconfig.json'
+      }
     ];
 
     outerFiles.map(async (item, index) => {
@@ -64,9 +81,7 @@ module.exports = {
         }`,
         props: { projectName }
       });
-      info(
-        `${projectName}${separator}${item.fileName} was created.`
-      );
+      info(`${projectName}${separator}${item.fileName} was created.`);
     });
 
     const sourceFolders = [
